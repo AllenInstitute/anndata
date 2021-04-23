@@ -64,6 +64,9 @@ class BackedSparseMatrix(_cs_matrix):
             # make a list for interaction with h5py
             offsets = list(offsets)
             # only affects existing non-zero cells
+            # when offsets and x are not in increasing order, they must be sorted
+            x = x[np.argsort(offsets)]
+            offsets.sort()
             self.data[offsets] = x
             return
 
